@@ -8,18 +8,17 @@ request.get(url, (err, res, body) => {
   if (!err && res.statusCode === 200) {
     const data = JSON.parse(body);
     const chars = data.characters;
-    if (chars && chars.length > 0) {
-      chars.forEach((charUrl) => {
-        request(charUrl, (err, res, body) => {
-          if (!err && res.statusCode === 200) {
-            const charData = JSON.parse(body);
-            console.log(charData.name);
-          } else {
-            console.err('An error occured: ', err);
-          }
-        });
+
+    chars.forEach((charUrl) => {
+      request(charUrl, (err, res, body) => {
+        if (!err && res.statusCode === 200) {
+          const charData = JSON.parse(body);
+          console.log(charData.name);
+        } else {
+          console.err('An error occured: ', err);
+        }
       });
-    }
+    });
   } else {
     console.error('An error occured: ', err);
   }

@@ -9,16 +9,21 @@ request.get(url, (err, res, body) => {
     const data = JSON.parse(body);
     const chars = data.characters;
 
-    chars.forEach((charUrl) => {
-      request(charUrl, (err, res, body) => {
-        if (!err && res.statusCode === 200) {
-          const charData = JSON.parse(body);
-          console.log(charData.name);
-        } else {
-          console.err('An error occured: ', err);
-        }
-      });
-    });
+    const getCharacter = (idx) => {
+      if (idx < chars.length) {
+        const charUrl = chars[idx];
+        request(charUrl, (err, res, body) => {
+          if (!err && res.statusCode === 200) {
+            const charData = JSON.parse(body);
+            console.log(charData.name);
+          } else {
+            console.error('Error: ', err);
+          }
+          getCharacter(idx + 1);
+        });
+      }
+    };
+    getCharacter(0);
   } else {
     console.error('An error occured: ', err);
   }

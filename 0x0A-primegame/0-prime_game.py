@@ -7,12 +7,12 @@ def isWinner(x, nums):
     def calculate_primes(n):
         primes = [True] * (n + 1)
         primes[0] = primes[1] = False
-        p = 2
-        while p * p <= n:
-            if primes[p]:
-                for i in range(p * p, n + 1, p):
+        curr_prime = 2
+        while curr_prime * curr_prime <= n:
+            if primes[curr_prime]:
+                for i in range(curr_prime * curr_prime, n + 1, curr_prime):
                     primes[i] = False
-            p += 1
+            curr_prime += 1
         return [i for i in range(2, n + 1) if primes[i]]
 
     maria_wins = 0

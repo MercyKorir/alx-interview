@@ -14,6 +14,8 @@ def is_prime(num):
 
 def get_primes(n):
     """gets all prime numbers"""
+    if n <= 0:
+        return []
     primes = []
     for num in range(2, n + 1):
         if is_prime(num):
@@ -27,6 +29,8 @@ def isWinner(x, nums):
     ben_wins = 0
 
     for n in nums:
+        if n == 0:
+            continue
         primes = get_primes(n)
         num_primes = len(primes)
 

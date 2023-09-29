@@ -2,19 +2,25 @@
 """Definition of function isWinner"""
 
 
+def is_prime(num):
+    """determine if a number is prime"""
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+
 def get_primes(n):
     """gets all prime numbers"""
-    is_prime = [True] * (n + 1)
-    is_prime[0] = is_prime[1] = False
-
-    p = 2
-    while p * p <= n:
-        if is_prime[p]:
-            for i in range(p * p, n + 1, p):
-                is_prime[i] = False
-        p += 1
-
-    return [i for i, prime in enumerate(is_prime) if prime]
+    if n <= 0:
+        return []
+    primes = []
+    for num in range(2, n + 1):
+        if is_prime(num):
+            primes.append(num)
+    return primes
 
 
 def isWinner(x, nums):
@@ -25,14 +31,13 @@ def isWinner(x, nums):
     maria_wins = 0
     ben_wins = 0
 
-    max_n = max(nums)
-    primes = get_primes(max_n)
-
     for n in nums:
         if n == 0:
             continue
+        primes = get_primes(n)
+        num_primes = len(primes)
 
-        if n in primes:
+        if num_primes % 2 == 0:
             ben_wins += 1
         else:
             maria_wins += 1

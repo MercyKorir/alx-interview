@@ -25,6 +25,9 @@ def get_primes(n):
 
 def isWinner(x, nums):
     """determines who winner of each game is"""
+    if x < 0:
+        return None
+
     maria_wins = 0
     ben_wins = 0
 
